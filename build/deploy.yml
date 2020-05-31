@@ -21,6 +21,7 @@ jobs:
               displayName: Publish key-vault
               inputs:
                 connectTo: 'VsTeam'
+                connectedServiceName: 'marketplace'
                 fileType: 'vsix'
                 vsixFile: $(Pipeline.Workspace)/VSIX/JamieTaffurelli.azure-key-vault-key-cert-deploy-*.vsix
                 updateTasksVersion: false
@@ -31,6 +32,7 @@ jobs:
               displayName: Publish management-group
               inputs:
                 connectTo: 'VsTeam'
+                connectedServiceName: 'marketplace'
                 fileType: 'vsix'
                 vsixFile: $(Pipeline.Workspace)/VSIX/JamieTaffurelli.azure-management-group-deploy-*.vsix
                 updateTasksVersion: false
@@ -41,6 +43,7 @@ jobs:
               displayName: Publish resource-lock
               inputs:
                 connectTo: 'VsTeam'
+                connectedServiceName: 'marketplace'
                 fileType: 'vsix'
                 vsixFile: $(Pipeline.Workspace)/VSIX/JamieTaffurelli.azure-reosurce-lock-*.vsix
                 updateTasksVersion: false
@@ -51,6 +54,7 @@ jobs:
               displayName: Publish subscription-deploy
               inputs:
                 connectTo: 'VsTeam'
+                connectedServiceName: 'marketplace'
                 fileType: 'vsix'
                 vsixFile: $(Pipeline.Workspace)/VSIX/JamieTaffurelli.azure-subscription-deploy-*.vsix
                 updateTasksVersion: false
@@ -61,6 +65,7 @@ jobs:
               displayName: Publish tenant-deploy
               inputs:
                 connectTo: 'VsTeam'
+                connectedServiceName: 'marketplace'
                 fileType: 'vsix'
                 vsixFile: $(Pipeline.Workspace)/VSIX/JamieTaffurelli.azure-tenant-deploy-*.vsix
                 updateTasksVersion: false
