@@ -3,7 +3,7 @@ parameters:
   poolName: ""
 
 jobs:
-  - deployment: Publish Azure DevOps Extensions
+  - deployment: Publish_Azure_DevOps_Extensions
     pool:
       vmImage: ${{ parameters.poolName }}
       workspace:
