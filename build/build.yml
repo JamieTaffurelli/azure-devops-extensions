@@ -1,0 +1,232 @@
+parameters:
+  poolName: ""
+  extensions: []
+
+jobs:
+  - job:
+    pool:
+      vmImage: ${{ parameters.poolName }}
+    steps:
+
+      - task: PowerShell@2		
+        displayName: 'Install Required PowerShell Modules'
+        inputs:		
+          targetType: 'filePath'		
+          filePath: '$(System.DefaultWorkingDirectory)\get-modules.ps1'		
+          arguments: '@(@{Name = "az"})'		
+          errorActionPreference: 'stop'
+          failOnStderr: false		
+          ignoreLASTEXITCODE: false
+          pwsh: false		
+          workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+      - task: PowerShell@2
+        displayName: "Save VstsTaskSdk"
+        inputs:
+          targetType: "filePath"
+          filePath: '$(System.DefaultWorkingDirectory)\get-modules.ps1'
+          arguments: '-Mode "Save" -Modules @(@{Name = "VstsTaskSdk"; RequiredVersion = "0.11.0" })'
+          errorActionPreference: "stop"
+          failOnStderr: false
+          ignoreLASTEXITCODE: false
+          pwsh: false
+
+      - task: DownloadPipelineArtifact@2
+        displayName: "Download Azure Builder Module"
+        inputs:
+          artifact: "module"
+          source: "specific"
+          project: "CloudDeployments"
+          pipeline: "JamieTaffurelli.AzureBuilder"
+          patterns: '**'
+          path: '$(Pipeline.Workspace)\module'
+
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: '(Get-ChildItem -Path $(Pipeline.Workspace) -Recurse).FullName'
+
+      - task: CopyFiles@2               
+        displayName: 'Copy VstsTaskSdk to key-vault-cert'
+        inputs:
+          sourceFolder: '$(System.DefaultWorkingDirectory)\VstsTaskSdk\0.11.0'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\key-vault\tasks\key-vault-cert\v1\ps_modules\VstsTaskSdk'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+
+      - task: CopyFiles@2               
+        displayName: 'Copy Azure Builder to key-vault-cert'
+        inputs:
+          sourceFolder: '$(Pipeline.Workspace)\module'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\key-vault\tasks\key-vault-cert\v1\ps_modules\AzureBuilder'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+      
+      - task: CopyFiles@2               
+        displayName: 'Copy VstsTaskSdk to key-vault-key'
+        inputs:
+          sourceFolder: '$(System.DefaultWorkingDirectory)\VstsTaskSdk\0.11.0'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\key-vault\tasks\key-vault-key\v1\ps_modules\VstsTaskSdk'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+
+      - task: CopyFiles@2               
+        displayName: 'Copy Azure Builder to key-vault-key'
+        inputs:
+          sourceFolder: '$(Pipeline.Workspace)\module'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\key-vault\tasks\key-vault-key\v1\ps_modules\AzureBuilder'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+      
+      - task: CopyFiles@2               
+        displayName: 'Copy VstsTaskSdk to resource-lock'
+        inputs:
+          sourceFolder: '$(System.DefaultWorkingDirectory)\VstsTaskSdk\0.11.0'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\resource-lock\tasks\resource-lock\v1\ps_modules\VstsTaskSdk'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+
+      - task: CopyFiles@2               
+        displayName: 'Copy Azure Builder to resource-lock'
+        inputs:
+          sourceFolder: '$(Pipeline.Workspace)\module'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\resource-lock\tasks\resource-lock\v1\ps_modules\AzureBuilder'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+
+      - task: CopyFiles@2               
+        displayName: 'Copy VstsTaskSdk to tenant-deploy'
+        inputs:
+          sourceFolder: '$(System.DefaultWorkingDirectory)\VstsTaskSdk\0.11.0'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\tenant-deploy\tasks\tenant-deploy\v1\ps_modules\VstsTaskSdk'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+
+      - task: CopyFiles@2               
+        displayName: 'Copy Azure Builder to tenant-deploy'
+        inputs:
+          sourceFolder: '$(Pipeline.Workspace)\module'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\tenant-deploy\tasks\tenant-deploy\v1\ps_modules\AzureBuilder'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+      
+      - task: CopyFiles@2               
+        displayName: 'Copy VstsTaskSdk to subscription-deploy'
+        inputs:
+          sourceFolder: '$(System.DefaultWorkingDirectory)\VstsTaskSdk\0.11.0'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\subscription-deploy\tasks\subscription-deploy\v1\ps_modules\VstsTaskSdk'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+
+      - task: CopyFiles@2               
+        displayName: 'Copy Azure Builder to subscription-deploy'
+        inputs:
+          sourceFolder: '$(Pipeline.Workspace)\module'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\subscription-deploy\tasks\subscription-deploy\v1\ps_modules\AzureBuilder'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+      
+      - task: CopyFiles@2               
+        displayName: 'Copy VstsTaskSdk to management-group-deploy'
+        inputs:
+          sourceFolder: '$(System.DefaultWorkingDirectory)\VstsTaskSdk\0.11.0'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\management-group-deploy\tasks\management-group-deploy\v1\ps_modules\VstsTaskSdk'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+
+      - task: CopyFiles@2               
+        displayName: 'Copy Azure Builder to management-group-deploy'
+        inputs:
+          sourceFolder: '$(Pipeline.Workspace)\module'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\management-group-deploy\tasks\management-group-deploy\v1\ps_modules\AzureBuilder'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+
+      - task: cca5462b-887d-4617-bf3f-dcf0d3c622e9@9
+        displayName: "Run Unit Tests"
+        inputs:
+          resultsFile: '$(System.DefaultWorkingDirectory)\test-results.xml'
+          run32Bit: false
+
+      - task: PublishTestResults@2
+        displayName: "Publish Test Results"
+        inputs:
+          testResultsFormat: "NUnit"
+          testResultsFiles: "test-results.xml"
+          searchFolder: "$(System.DefaultWorkingDirectory)"
+          mergeTestResults: false
+          failTaskOnFailedTests: true
+          publishRunAttachments: true
+        condition: always()
+
+      - task: PackageAzureDevOpsExtension@2
+        displayName: "Package Key Vault Extension"
+        inputs:
+          rootFolder: '$(System.DefaultWorkingDirectory)\src\key-vault'
+          updateTasksVersion: false
+
+      - task: PackageAzureDevOpsExtension@2
+        displayName: "Package Resource Lock Extension"
+        inputs:
+          rootFolder: '$(System.DefaultWorkingDirectory)\src\resource-lock'
+          updateTasksVersion: false
+      
+      - task: PackageAzureDevOpsExtension@2
+        displayName: "Package Management Group Extension"
+        inputs:
+          rootFolder: '$(System.DefaultWorkingDirectory)\src\management-group-deploy'
+          updateTasksVersion: false
+      
+      - task: PackageAzureDevOpsExtension@2
+        displayName: "Package Tenant Extension"
+        inputs:
+          rootFolder: '$(System.DefaultWorkingDirectory)\src\tenant-deploy'
+          updateTasksVersion: false
+      
+      - task: PackageAzureDevOpsExtension@2
+        displayName: "Package Subscription Extension"
+        inputs:
+          rootFolder: '$(System.DefaultWorkingDirectory)\src\subscription-deploy'
+          updateTasksVersion: false
+
+      - task: CopyFiles@2
+        displayName: "Copy VSIX to Staging Directory"
+        inputs:
+          sourceFolder: '$(System.DefaultWorkingDirectory)'
+          contents: '**\*.vsix'
+          targetFolder: '$(Build.ArtifactStagingDirectory)'
+          cleanTargetFolder: true
+          overWrite: true
+          flattenFolders: false
+        condition: "and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))"
+
+      - task: PublishPipelineArtifact@1
+        displayName: "Publish VSIX"
+        inputs:
+          targetPath: '$(Build.ArtifactStagingDirectory)'
+          artifact: "VSIX"
+        condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))

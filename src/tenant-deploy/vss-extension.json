@@ -1,0 +1,70 @@
+{
+  "manifestVersion": 1,
+  "id": "azure-tenant-deploy",
+  "version": "0.1.0",
+  "name": "Azure Tenant Deploy",
+  "description": "Deploy ARM template to Azure tenant",
+  "publisher": "JamieTaffurelli",
+  "public": false,
+  "categories": ["Azure Pipelines"],
+  "scopes": ["vso.release", "vso.serviceendpoint"],
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "icons": {
+    "default": "images/logo.png"
+  },
+  "tags": ["release", "build", "Azure", "Resource", "Tenant", "ARM", "Deploy"],
+  "screenshots": [],
+  "branding": {
+    "color": "rgb(0, 0, 0)",
+    "theme": "dark"
+  },
+  "content": {
+    "details": {
+      "path": "README.md"
+    },
+    "license": {
+      "path": "LICENSE"
+    }
+  },
+  "links": {
+    "getstarted": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions/blob/master/tenant-deploy/README.md"
+    },
+    "issues": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions/issues"
+    },
+    "license": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions/blob/master/tenant-deploy/LICENSE"
+    },
+    "repository": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions"
+    },
+    "support": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions/issues"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions"
+  },
+  "files": [
+    {
+      "path": "tasks/tenant-deploy/v1"
+    },
+    {
+      "path": "images/logo.png",
+      "addressable": true
+    }
+  ],
+  "contributions": [
+    {
+      "id": "azure-tenant-deploy",
+      "type": "ms.vss-distributed-task.task",
+      "targets": ["ms.vss-distributed-task.tasks"]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+trigger:
+  - master
+
+stages:
+  - stage: Build
+    jobs:
+      - template: build.yml
+        parameters:
+          poolName: "windows-latest"
+
+  - stage: Deploy	
+    jobs:	
+      - template: deploy.yml	
+        parameters:	
+          poolName: "windows-latest"	
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))

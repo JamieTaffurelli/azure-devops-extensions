@@ -1,0 +1,68 @@
+parameters:
+  environment: "Production"
+  poolName: ""
+
+jobs:
+  - deployment: Publish Azure DevOps Extensions
+    pool:
+      vmImage: ${{ parameters.poolName }}
+      workspace:
+        clean: all
+    environment: ${{ parameters.environment }}
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - download: current
+              displayName: Download VSIX
+              artifact: VSIX
+              
+            - task: PublishAzureDevOpsExtension@2
+              displayName: Publish key-vault
+              inputs:
+                connectTo: 'VsTeam'
+                fileType: 'vsix'
+                vsixFile: $(Pipeline.Workspace)/VSIX/JamieTaffurelli.azure-key-vault-key-cert-deploy-*.vsix
+                updateTasksVersion: false
+                extensionVisibility: 'publicpreview'
+                extensionPricing: 'free'
+            
+            - task: PublishAzureDevOpsExtension@2
+              displayName: Publish management-group
+              inputs:
+                connectTo: 'VsTeam'
+                fileType: 'vsix'
+                vsixFile: $(Pipeline.Workspace)/VSIX/JamieTaffurelli.azure-management-group-deploy-*.vsix
+                updateTasksVersion: false
+                extensionVisibility: 'publicpreview'
+                extensionPricing: 'free'
+
+            - task: PublishAzureDevOpsExtension@2
+              displayName: Publish resource-lock
+              inputs:
+                connectTo: 'VsTeam'
+                fileType: 'vsix'
+                vsixFile: $(Pipeline.Workspace)/VSIX/JamieTaffurelli.azure-reosurce-lock-*.vsix
+                updateTasksVersion: false
+                extensionVisibility: 'publicpreview'
+                extensionPricing: 'free'
+
+            - task: PublishAzureDevOpsExtension@2
+              displayName: Publish subscription-deploy
+              inputs:
+                connectTo: 'VsTeam'
+                fileType: 'vsix'
+                vsixFile: $(Pipeline.Workspace)/VSIX/JamieTaffurelli.azure-subscription-deploy-*.vsix
+                updateTasksVersion: false
+                extensionVisibility: 'publicpreview'
+                extensionPricing: 'free'
+
+            - task: PublishAzureDevOpsExtension@2
+              displayName: Publish tenant-deploy
+              inputs:
+                connectTo: 'VsTeam'
+                fileType: 'vsix'
+                vsixFile: $(Pipeline.Workspace)/VSIX/JamieTaffurelli.azure-tenant-deploy-*.vsix
+                updateTasksVersion: false
+                extensionVisibility: 'publicpreview'
+                extensionPricing: 'free'

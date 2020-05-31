@@ -1,0 +1,38 @@
+{
+  "id": "1e9cca33-5b4c-48be-a1ef-caa9ba32fbfc",
+  "name": "azure-subscription-deploy",
+  "friendlyName": "Azure Subscription Deploy",
+  "description": "Deploy ARM template to Azure Subscription",
+  "helpMarkDown": "[More information]https://github.com/JamieTaffurelli/azure-devops-extensions/blob/master/subscription-deploy/README.md",
+  "category": "Utility",
+  "visibility": ["Build", "Release"],
+  "runsOn": ["Agent", "MachineGroup"],
+  "author": "JamieTaffurelli",
+  "version": {
+    "Major": 0,
+    "Minor": 1,
+    "Patch": 0
+  },
+  "instanceNameFormat": "Deploy Subscription",
+  "minimumAgentVersion": "1.83.0",
+  "inputs": [
+    {
+      "name": "ConnectedServiceNameARM",
+      "aliases": ["azureSubscription"],
+      "type": "connectedService:AzureRM",
+      "label": "Azure Subscription",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Azure Resource Manager subscription to authenticate as",
+      "properties": {
+        "EndpointFilterRule": "ScopeLevel != AzureMLWorkspace"
+      }
+    }
+  ],
+  "execution": {
+    "PowerShell3": {
+      "target": "subscription-deploy.ps1",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}

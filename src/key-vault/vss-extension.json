@@ -1,0 +1,78 @@
+{
+  "manifestVersion": 1,
+  "id": "azure-key-vault-key-cert-deploy",
+  "version": "0.1.0",
+  "name": "Key Vault Key and Certificate Deploy",
+  "description": "Tasks for deploying key and certificates to Azure Key Vault",
+  "publisher": "JamieTaffurelli",
+  "public": false,
+  "categories": ["Azure Pipelines"],
+  "scopes": ["vso.release", "vso.serviceendpoint"],
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "icons": {
+    "default": "images/logo.png"
+  },
+  "tags": ["release", "build", "Azure", "key", "vault", "certificate"],
+  "screenshots": [],
+  "branding": {
+    "color": "rgb(0, 0, 0)",
+    "theme": "dark"
+  },
+  "content": {
+    "details": {
+      "path": "README.md"
+    },
+    "license": {
+      "path": "LICENSE"
+    }
+  },
+  "links": {
+    "getstarted": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions/blob/master/key-vault/README.md"
+    },
+    "issues": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions/issues"
+    },
+    "license": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions/blob/master/key-vault/LICENSE"
+    },
+    "repository": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions"
+    },
+    "support": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions/issues"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions"
+  },
+  "files": [
+    {
+      "path": "tasks/key-vault-cert/v1"
+    },
+    {
+      "path": "tasks/key-vault-key/v1"
+    },
+    {
+      "path": "images/logo.png",
+      "addressable": true
+    }
+  ],
+  "contributions": [
+    {
+      "id": "key-vault-certificate-generation",
+      "type": "ms.vss-distributed-task.task",
+      "targets": ["ms.vss-distributed-task.tasks"]
+    },
+    {
+      "id": "key-vault-key-generation",
+      "type": "ms.vss-distributed-task.task",
+      "targets": ["ms.vss-distributed-task.tasks"]
+    }
+  ]
+}
