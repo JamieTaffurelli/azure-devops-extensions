@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "azure-key-vault-key-cert-deploy",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "name": "Key Vault Key and Certificate Deploy",
   "description": "Tasks for deploying key and certificates to Azure Key Vault",
   "publisher": "JamieTaffurelli",
@@ -77,7 +77,7 @@
       "type": "ms.vss-distributed-task.task",
       "targets": ["ms.vss-distributed-task.tasks"],
       "properties": {
-        "name": "tasks/key-vault-cert/v1"
+        "name": "tasks/key-vault-key/v1"
       }
     }
   ]
