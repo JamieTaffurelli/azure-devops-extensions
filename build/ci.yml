@@ -8,9 +8,42 @@ stages:
         parameters:
           poolName: "windows-latest"
 
-  - stage: Deploy	
+  - stage: Deploy_Key_Vault
     jobs:	
       - template: deploy.yml	
         parameters:	
-          poolName: "windows-latest"	
+          poolName: "windows-latest"
+          environment: "azure-key-vault-key-cert-deploy"	
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  
+  - stage: Deploy_Management_Group
+    jobs:	
+      - template: deploy.yml	
+        parameters:	
+          poolName: "windows-latest"
+          environment: "azure-management-group-deploy"	
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+  - stage: Deploy_Tenant
+    jobs:	
+      - template: deploy.yml	
+        parameters:	
+          poolName: "windows-latest"
+          environment: "azure-tenant-deploy"	
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+  - stage: Deploy_Subscription
+    jobs:	
+      - template: deploy.yml	
+        parameters:	
+          poolName: "windows-latest"
+          environment: "azure-subscription-deploy"	
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+  - stage: Deploy_Resource_Lock
+    jobs:	
+      - template: deploy.yml	
+        parameters:	
+          poolName: "windows-latest"
+          environment: "azure-resource-lock"
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
