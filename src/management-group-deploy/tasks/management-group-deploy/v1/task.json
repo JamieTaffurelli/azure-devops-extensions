@@ -1,0 +1,38 @@
+{
+  "id": "2f361789-098e-4c80-8c9e-cbd06f723163",
+  "name": "azure-management-group-deploy",
+  "friendlyName": "Azure Management Group Deploy",
+  "description": "Deploy ARM template to Azure Management Group",
+  "helpMarkDown": "[More information]https://github.com/JamieTaffurelli/azure-devops-extensions/blob/master/management-group-deploy/README.md",
+  "category": "Utility",
+  "visibility": ["Build", "Release"],
+  "runsOn": ["Agent", "MachineGroup"],
+  "author": "JamieTaffurelli",
+  "version": {
+    "Major": 0,
+    "Minor": 3,
+    "Patch": 0
+  },
+  "instanceNameFormat": "Deploy Subscription",
+  "minimumAgentVersion": "1.83.0",
+  "inputs": [
+    {
+      "name": "ConnectedServiceNameARM",
+      "aliases": ["azureSubscription"],
+      "type": "connectedService:AzureRM",
+      "label": "Azure Subscription",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Azure Resource Manager subscription to authenticate as",
+      "properties": {
+        "EndpointFilterRule": "ScopeLevel != AzureMLWorkspace"
+      }
+    }
+  ],
+  "execution": {
+    "PowerShell3": {
+      "target": "management-group-deploy.ps1",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
