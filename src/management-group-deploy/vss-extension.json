@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "azure-management-group-deploy",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "name": "Azure Management Group Deploy",
   "description": "Deploy ARM template to Azure Management Group",
   "publisher": "JamieTaffurelli",
