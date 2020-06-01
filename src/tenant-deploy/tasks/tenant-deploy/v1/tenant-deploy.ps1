@@ -4,7 +4,7 @@ Connect-AzureBuilderDevOpsAccount -Name "ConnectedServiceNameARM"
 
 $location = Get-VstsInput -Name location -Require
 $deploymentName = Get-VstsInput -Name deploymentName -Default (New-Guid)
-$extraParameters = Get-VstsInput -Name deploymentName -Default ([string]::Empty)
+$extraParameters = Get-VstsInput -Name extraParameters -Default ([string]::Empty)
 
 switch(Get-VstsInput -Name templateLocation -Require)
 {
