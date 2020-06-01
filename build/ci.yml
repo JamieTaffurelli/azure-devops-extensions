@@ -16,15 +16,6 @@ stages:
           environment: "azure-key-vault-key-cert-deploy"	
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     dependsOn: Build
-  
-  - stage: Deploy_Management_Group
-    jobs:	
-      - template: deploy.yml	
-        parameters:	
-          poolName: "windows-latest"
-          environment: "azure-management-group-deploy"	
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-    dependsOn: Build
 
   - stage: Deploy_Tenant
     jobs:	
@@ -32,15 +23,6 @@ stages:
         parameters:	
           poolName: "windows-latest"
           environment: "azure-tenant-deploy"	
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-    dependsOn: Build
-
-  - stage: Deploy_Subscription
-    jobs:	
-      - template: deploy.yml	
-        parameters:	
-          poolName: "windows-latest"
-          environment: "azure-subscription-deploy"	
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     dependsOn: Build
 
