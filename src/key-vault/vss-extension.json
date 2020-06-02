@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "azure-key-vault-key-cert-deploy",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "name": "Key Vault Key and Certificate Deploy",
   "description": "Tasks for deploying key and certificates to Azure Key Vault",
   "publisher": "JamieTaffurelli",
@@ -59,7 +59,7 @@
       "path": "tasks/key-vault-key/v1"
     },
     {
-      "path": "images/logo.png",
+      "path": "images",
       "addressable": true
     }
   ],

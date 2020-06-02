@@ -9,11 +9,11 @@
   "runsOn": ["Agent", "MachineGroup"],
   "author": "JamieTaffurelli",
   "version": {
-    "Major": 0,
-    "Minor": 2,
+    "Major": 1,
+    "Minor": 0,
     "Patch": 0
   },
-  "instanceNameFormat": "$(LockType) Resources",
+  "instanceNameFormat": "$(Action) Resources",
   "minimumAgentVersion": "1.83.0",
   "inputs": [
     {

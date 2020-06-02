@@ -25,5 +25,5 @@ jobs:
                 fileType: 'vsix'
                 vsixFile: $(Pipeline.Workspace)/VSIX/JamieTaffurelli.${{ parameters.environment }}-*.vsix
                 updateTasksVersion: false
-                extensionVisibility: 'publicpreview'
+                extensionVisibility: 'public'
                 extensionPricing: 'free'
