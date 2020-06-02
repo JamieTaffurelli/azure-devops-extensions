@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "azure-resource-lock",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "name": "Azure Resource Lock",
   "description": "Lock Azure Resources and Resource Group",
   "publisher": "JamieTaffurelli",
@@ -56,7 +56,7 @@
       "path": "tasks/resource-lock/v1"
     },
     {
-      "path": "images/logo.png",
+      "path": "images",
       "addressable": true
     }
   ],
