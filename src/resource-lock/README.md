@@ -3,7 +3,7 @@ Azure DevOps task that allows deployment at Tenant level with ARM template (invo
 
 ## UI
 
-![Tenant Deploy parameters](images/task-screenshot.png)
+![Resource lock parameters](images/task-screenshot.png)
 
 ## YAML
 ```yaml
