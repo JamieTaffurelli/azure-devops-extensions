@@ -2,7 +2,7 @@
 
 Connect-AzureBuilderDevOpsAccount -Name "ConnectedServiceNameARM"
 
-$location = Get-VstsInput -Name location -Require
+$location = (Get-VstsInput -Name location -Require).Trim().toLower()
 $deploymentName = Get-VstsInput -Name deploymentName -Default (New-Guid)
 $extraParameters = Get-VstsInput -Name extraParameters -Default ([string]::Empty)
 
