@@ -158,6 +158,10 @@ jobs:
           publishRunAttachments: true
         condition: always()
 
+      - task: TfxInstaller@3
+          inputs:
+            version: "v0.7.x"
+
       - task: PackageAzureDevOpsExtension@3
         displayName: "Package Key Vault Extension"
         inputs:
