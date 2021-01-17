@@ -126,6 +126,16 @@ jobs:
           overWrite: true
           flattenFolders: false
 
+      - task: CopyFiles@2               
+        displayName: 'Copy Azure Builder to what-if'
+        inputs:
+          sourceFolder: '$(Pipeline.Workspace)\module'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\what-if\tasks\what-if\v1\ps_modules\AzureBuilder'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+
       - task: cca5462b-887d-4617-bf3f-dcf0d3c622e9@9
         displayName: "Run Unit Tests"
         inputs:
@@ -159,6 +169,12 @@ jobs:
         displayName: "Package Tenant Extension"
         inputs:
           rootFolder: '$(System.DefaultWorkingDirectory)\src\tenant-deploy'
+          updateTasksVersion: false
+
+      - task: PackageAzureDevOpsExtension@2
+        displayName: "Package What If Extension"
+        inputs:
+          rootFolder: '$(System.DefaultWorkingDirectory)\src\what-if'
           updateTasksVersion: false
 
       - task: CopyFiles@2
