@@ -16,8 +16,13 @@ jobs:
             - download: current
               displayName: Download VSIX
               artifact: VSIX
-              
-            - task: PublishAzureDevOpsExtension@2
+            
+            - task: TfxInstaller@3
+              displayName: "Install tfx"
+              inputs:
+                version: "v0.7.x"
+
+            - task: PublishAzureDevOpsExtension@3
               displayName: Publish ${{ parameters.environment }}
               inputs:
                 connectTo: 'VsTeam'
