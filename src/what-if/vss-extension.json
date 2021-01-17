@@ -1,0 +1,73 @@
+{
+  "manifestVersion": 1,
+  "id": "azure-what-if",
+  "version": "0.0.1",
+  "name": "Azure What If Deployment",
+  "description": "Generate Azure what if results from an ARM template",
+  "publisher": "JamieTaffurelli",
+  "public": false,
+  "categories": ["Azure Pipelines"],
+  "scopes": ["vso.release", "vso.serviceendpoint"],
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "icons": {
+    "default": "images/logo.png"
+  },
+  "tags": ["release", "build", "Azure", "Resource", "Tenant", "ARM", "Deploy", "Whatif", "What", "If"],
+  "screenshots": [],
+  "branding": {
+    "color": "rgb(0, 0, 0)",
+    "theme": "dark"
+  },
+  "content": {
+    "details": {
+      "path": "README.md"
+    },
+    "license": {
+      "path": "LICENSE"
+    }
+  },
+  "links": {
+    "getstarted": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions/blob/master/what-if/README.md"
+    },
+    "issues": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions/issues"
+    },
+    "license": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions/blob/master/what-if/LICENSE"
+    },
+    "repository": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions"
+    },
+    "support": {
+      "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions/issues"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/JamieTaffurelli/azure-devops-extensions"
+  },
+  "files": [
+    {
+      "path": "tasks/what-if/v1"
+    },
+    {
+      "path": "images",
+      "addressable": true
+    }
+  ],
+  "contributions": [
+    {
+      "id": "azure-what-if",
+      "type": "ms.vss-distributed-task.task",
+      "targets": ["ms.vss-distributed-task.tasks"],
+      "properties": {
+        "name": "tasks/what-if/v1"
+      }
+    }
+  ]
+}

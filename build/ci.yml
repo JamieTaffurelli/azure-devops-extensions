@@ -34,3 +34,12 @@ stages:
           environment: "azure-resource-lock"
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     dependsOn: Build
+
+  - stage: Deploy_What_If
+    jobs:	
+      - template: deploy.yml	
+        parameters:	
+          poolName: "windows-latest"
+          environment: "azure-what-if"	
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    dependsOn: Build

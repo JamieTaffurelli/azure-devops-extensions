@@ -41,11 +41,6 @@ jobs:
           patterns: '**'
           path: '$(Pipeline.Workspace)\module'
 
-      - task: PowerShell@2
-        inputs:
-          targetType: 'inline'
-          script: '(Get-ChildItem -Path $(Pipeline.Workspace) -Recurse).FullName'
-
       - task: CopyFiles@2               
         displayName: 'Copy VstsTaskSdk to key-vault-cert'
         inputs:
@@ -126,6 +121,26 @@ jobs:
           overWrite: true
           flattenFolders: false
 
+      - task: CopyFiles@2               
+        displayName: 'Copy VstsTaskSdk to what-if'
+        inputs:
+          sourceFolder: '$(System.DefaultWorkingDirectory)\VstsTaskSdk\0.11.0'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\what-if\tasks\what-if\v1\ps_modules\VstsTaskSdk'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+
+      - task: CopyFiles@2               
+        displayName: 'Copy Azure Builder to what-if'
+        inputs:
+          sourceFolder: '$(Pipeline.Workspace)\module'
+          contents: '**' 
+          targetFolder: '$(System.DefaultWorkingDirectory)\src\what-if\tasks\what-if\v1\ps_modules\AzureBuilder'
+          cleanTargetFolder: false
+          overWrite: true
+          flattenFolders: false
+
       - task: cca5462b-887d-4617-bf3f-dcf0d3c622e9@9
         displayName: "Run Unit Tests"
         inputs:
@@ -143,22 +158,33 @@ jobs:
           publishRunAttachments: true
         condition: always()
 
-      - task: PackageAzureDevOpsExtension@2
+      - task: TfxInstaller@3
+        displayName: "Install tfx"
+        inputs:
+          version: "v0.7.x"
+
+      - task: PackageAzureDevOpsExtension@3
         displayName: "Package Key Vault Extension"
         inputs:
           rootFolder: '$(System.DefaultWorkingDirectory)\src\key-vault'
           updateTasksVersion: false
 
-      - task: PackageAzureDevOpsExtension@2
+      - task: PackageAzureDevOpsExtension@3
         displayName: "Package Resource Lock Extension"
         inputs:
           rootFolder: '$(System.DefaultWorkingDirectory)\src\resource-lock'
           updateTasksVersion: false
       
-      - task: PackageAzureDevOpsExtension@2
+      - task: PackageAzureDevOpsExtension@3
         displayName: "Package Tenant Extension"
         inputs:
           rootFolder: '$(System.DefaultWorkingDirectory)\src\tenant-deploy'
+          updateTasksVersion: false
+
+      - task: PackageAzureDevOpsExtension@3
+        displayName: "Package What If Extension"
+        inputs:
+          rootFolder: '$(System.DefaultWorkingDirectory)\src\what-if'
           updateTasksVersion: false
 
       - task: CopyFiles@2
