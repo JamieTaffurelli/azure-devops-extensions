@@ -158,25 +158,25 @@ jobs:
           publishRunAttachments: true
         condition: always()
 
-      - task: PackageAzureDevOpsExtension@2
+      - task: PackageAzureDevOpsExtension@3
         displayName: "Package Key Vault Extension"
         inputs:
           rootFolder: '$(System.DefaultWorkingDirectory)\src\key-vault'
           updateTasksVersion: false
 
-      - task: PackageAzureDevOpsExtension@2
+      - task: PackageAzureDevOpsExtension@3
         displayName: "Package Resource Lock Extension"
         inputs:
           rootFolder: '$(System.DefaultWorkingDirectory)\src\resource-lock'
           updateTasksVersion: false
       
-      - task: PackageAzureDevOpsExtension@2
+      - task: PackageAzureDevOpsExtension@3
         displayName: "Package Tenant Extension"
         inputs:
           rootFolder: '$(System.DefaultWorkingDirectory)\src\tenant-deploy'
           updateTasksVersion: false
 
-      - task: PackageAzureDevOpsExtension@2
+      - task: PackageAzureDevOpsExtension@3
         displayName: "Package What If Extension"
         inputs:
           rootFolder: '$(System.DefaultWorkingDirectory)\src\what-if'
