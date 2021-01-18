@@ -6,7 +6,16 @@ $location = (Get-VstsInput -Name location -Require) -replace "\s", ""
 $deploymentName = Get-VstsInput -Name deploymentName -Default (New-Guid)
 $extraParameters = Get-VstsInput -Name extraParameters -Default ([string]::Empty)
 $resultFormat = Get-VstsInput -Name resultFormat -Require
-$excludeChangeType = (((Get-VstsInput -Name excludeChangeType -Require) -replace " ", ([string]::Empty)) -split ",")
+$excludeChangeType = ((Get-VstsInput -Name excludeChangeType -Default ([string]::Empty)) -replace " ", ([string]::Empty))
+
+if($excludeChangeType -ne ([string]::Empty))
+{
+    $excludeChangeTypeParam = "-ExcludeChangeType ${excludeChangeType}"
+}
+else 
+{
+    $excludeChangeTypeParam = [string]::Empty
+}
 
 switch(Get-VstsInput -Name templateLocation -Require)
 {
@@ -15,16 +24,18 @@ switch(Get-VstsInput -Name templateLocation -Require)
         $TemplateUri = Get-VstsInput -Name csmFileLink -Require 
         $TemplateParameterUri = Get-VstsInput -Name csmParametersFileLink -Require
 
-        $params = "-Name ${deploymentName} -Location ${location} -TemplateUri ${TemplateUri} -TemplateParameterUri ${TemplateParameterUri} -SkipTemplateParameterPrompt -ResultFormat ${resultFormat} -ExcludeChangeType ${excludeChangeType} ${extraParameters}"
+        $params = "-Name ${deploymentName} -Location ${location} -TemplateUri ${TemplateUri} -TemplateParameterUri ${TemplateParameterUri} -SkipTemplateParameterPrompt -ResultFormat ${resultFormat} ${excludeChangeTypeParam} ${extraParameters}"
     }
     "Linked artifact"
     {
         $TemplateFile = Get-VstsInput -Name csmFile -Require 
         $TemplateParameterFile = Get-VstsInput -Name csmParametersFile -Require
 
-        $params = "-Name ${deploymentName} -Location ${location} -TemplateFile ${TemplateFile} -TemplateParameterFile ${TemplateParameterFile} -SkipTemplateParameterPrompt -ResultFormat ${resultFormat} -ExcludeChangeType ${excludeChangeType} ${extraParameters}"
+        $params = "-Name ${deploymentName} -Location ${location} -TemplateFile ${TemplateFile} -TemplateParameterFile ${TemplateParameterFile} -SkipTemplateParameterPrompt -ResultFormat ${resultFormat} -ExcludeChangeType ${excludeChangeTypeParam} ${extraParameters}"
     }
 }
+
+
 
 switch(Get-VstsInput -Name deploymentScope -Require)
 {
