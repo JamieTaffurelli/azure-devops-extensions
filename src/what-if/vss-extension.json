@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "azure-what-if",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "name": "Azure What If Deployment",
   "description": "Generate Azure what if results from an ARM template",
   "publisher": "JamieTaffurelli",
