@@ -8,13 +8,13 @@ $extraParameters = Get-VstsInput -Name extraParameters -Default ([string]::Empty
 $resultFormat = Get-VstsInput -Name resultFormat -Require
 $excludeChangeType = ((Get-VstsInput -Name excludeChangeType -Default ([string]::Empty)) -replace " ", ([string]::Empty))
 
-if($excludeChangeType -ne ([string]::Empty))
+if($excludeChangeType -eq ([string]::Empty))
 {
-    $excludeChangeTypeParam = "-ExcludeChangeType ${excludeChangeType}"
+    $excludeChangeTypeParam = [string]::Empty
 }
 else 
 {
-    $excludeChangeTypeParam = [string]::Empty
+    $excludeChangeTypeParam = "-ExcludeChangeType ${excludeChangeType}"
 }
 
 switch(Get-VstsInput -Name templateLocation -Require)
@@ -31,7 +31,7 @@ switch(Get-VstsInput -Name templateLocation -Require)
         $TemplateFile = Get-VstsInput -Name csmFile -Require 
         $TemplateParameterFile = Get-VstsInput -Name csmParametersFile -Require
 
-        $params = "-Name ${deploymentName} -Location ${location} -TemplateFile ${TemplateFile} -TemplateParameterFile ${TemplateParameterFile} -SkipTemplateParameterPrompt -ResultFormat ${resultFormat} -ExcludeChangeType ${excludeChangeTypeParam} ${extraParameters}"
+        $params = "-Name ${deploymentName} -Location ${location} -TemplateFile ${TemplateFile} -TemplateParameterFile ${TemplateParameterFile} -SkipTemplateParameterPrompt -ResultFormat ${resultFormat} ${excludeChangeTypeParam} ${extraParameters}"
     }
 }
 
