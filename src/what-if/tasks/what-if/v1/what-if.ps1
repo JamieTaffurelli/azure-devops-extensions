@@ -43,16 +43,16 @@ switch(Get-VstsInput -Name deploymentScope -Require)
     "Management Group"
     {
         $managementGroupId = Get-VstsInput -Name managementGroupId -Require
-        Invoke-Expression -Command ("Get-AzManagementGroupDeploymentWhatIfResult -ManagementGroupId {0} -Location {1} {2}" -f $managementGroupId, $location, $params)
+        Invoke-Expression -Command ("Get-AzManagementGroupDeploymentWhatIfResult -ManagementGroupId {0} -Location {1} {2} | ConvertTo-Json" -f $managementGroupId, $location, $params)
     }
     "Subscription"
     {
-        Invoke-Expression -Command ("Get-AzDeploymentWhatIfResult -Location {0} {1}" -f $location, $params)
+        Invoke-Expression -Command ("Get-AzDeploymentWhatIfResult -Location {0} {1} | ConvertTo-Json" -f $location, $params)
     }
     "Resource Group"
     {
         $resourceGroupName = Get-VstsInput -Name resourceGroupName -Require
-        Invoke-Expression -Command ("Get-AzResourceGroupDeploymentWhatIfResult -ResourceGroupName {0} {1}" -f $resourceGroupName, $params)
+        Invoke-Expression -Command ("Get-AzResourceGroupDeploymentWhatIfResult -ResourceGroupName {0} {1} | ConvertTo-Json" -f $resourceGroupName, $params)
     }
 }
 
