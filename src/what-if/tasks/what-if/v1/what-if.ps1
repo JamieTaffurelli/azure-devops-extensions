@@ -43,9 +43,5 @@ switch(Get-VstsInput -Name deploymentScope -Require)
         $resourceGroupName = Get-VstsInput -Name resourceGroupName -Require
         Invoke-Expression -Command ("Get-AzResourceGroupDeploymentWhatIfResult -ResourceGroupName {0} {1}" -f $resourceGroupName, $params)
     }
-    "Tenant"
-    {
-        Invoke-Expression -Command ("Get-AzTenantDeploymentWhatIfResult {0}" -f $params)
-    }
 }
 
