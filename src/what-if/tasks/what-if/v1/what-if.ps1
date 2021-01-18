@@ -1,6 +1,6 @@
 . "${PSScriptRoot}\ps_modules\AzureBuilder\cmdlets\interface\Connect-AzureBuilderDevOpsAccount.ps1"
 
-Connect-AzureBuilderDevOpsAccount -Name "ConnectedServiceNameARM"
+Connect-AzureBuilderDevOpsAccount -Name "ConnectedServiceName"
 
 $location = (Get-VstsInput -Name location -Require) -replace "\s", ""
 $deploymentName = Get-VstsInput -Name deploymentName -Default (New-Guid)
