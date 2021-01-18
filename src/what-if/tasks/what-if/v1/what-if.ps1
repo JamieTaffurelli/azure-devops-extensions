@@ -24,14 +24,14 @@ switch(Get-VstsInput -Name templateLocation -Require)
         $TemplateUri = Get-VstsInput -Name csmFileLink -Require 
         $TemplateParameterUri = Get-VstsInput -Name csmParametersFileLink -Require
 
-        $params = "-Name ${deploymentName} -Location ${location} -TemplateUri ${TemplateUri} -TemplateParameterUri ${TemplateParameterUri} -SkipTemplateParameterPrompt -ResultFormat ${resultFormat} ${excludeChangeTypeParam} ${extraParameters}"
+        $params = "-Name ${deploymentName} -TemplateUri ${TemplateUri} -TemplateParameterUri ${TemplateParameterUri} -SkipTemplateParameterPrompt -ResultFormat ${resultFormat} ${excludeChangeTypeParam} ${extraParameters}"
     }
     "Linked artifact"
     {
         $TemplateFile = Get-VstsInput -Name csmFile -Require 
         $TemplateParameterFile = Get-VstsInput -Name csmParametersFile -Require
 
-        $params = "-Name ${deploymentName} -Location ${location} -TemplateFile ${TemplateFile} -TemplateParameterFile ${TemplateParameterFile} -SkipTemplateParameterPrompt -ResultFormat ${resultFormat} ${excludeChangeTypeParam} ${extraParameters}"
+        $params = "-Name ${deploymentName} -TemplateFile ${TemplateFile} -TemplateParameterFile ${TemplateParameterFile} -SkipTemplateParameterPrompt -ResultFormat ${resultFormat} ${excludeChangeTypeParam} ${extraParameters}"
     }
 }
 
@@ -43,11 +43,11 @@ switch(Get-VstsInput -Name deploymentScope -Require)
     "Management Group"
     {
         $managementGroupId = Get-VstsInput -Name managementGroupId -Require
-        Invoke-Expression -Command ("Get-AzManagementGroupDeploymentWhatIfResult -ManagementGroupId {0} {1}" -f $managementGroupId, $params)
+        Invoke-Expression -Command ("Get-AzManagementGroupDeploymentWhatIfResult -ManagementGroupId {0} -Location {1} {2}" -f $managementGroupId, $location, $params)
     }
     "Subscription"
     {
-        Invoke-Expression -Command ("Get-AzDeploymentWhatIfResult {0}" -f $params)
+        Invoke-Expression -Command ("Get-AzDeploymentWhatIfResult -Location {0} {1}" -f $location, $params)
     }
     "Resource Group"
     {
