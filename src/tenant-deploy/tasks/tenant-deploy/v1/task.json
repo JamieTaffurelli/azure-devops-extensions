@@ -10,8 +10,8 @@
   "author": "JamieTaffurelli",
   "version": {
     "Major": 1,
-    "Minor": 0,
-    "Patch": 1
+    "Minor": 1,
+    "Patch": 0
   },
   "instanceNameFormat": "Deploy Tenant",
   "minimumAgentVersion": "2.119.1",
@@ -24,7 +24,7 @@
     {
       "name": "Template",
       "displayName": "Template",
-      "isExpanded": false
+      "isExpanded": true
     },
     {
       "name": "Advanced",

@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "azure-tenant-deploy",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "name": "Azure Tenant Deploy",
   "description": "Deploy ARM template to Azure tenant",
   "publisher": "JamieTaffurelli",
