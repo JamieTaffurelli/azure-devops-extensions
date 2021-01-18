@@ -11,7 +11,7 @@
   "version": {
     "Major": 0,
     "Minor": 2,
-    "Patch": 5
+    "Patch": 6
   },
   "instanceNameFormat": "What if Deployment",
   "minimumAgentVersion": "2.119.1",
@@ -62,31 +62,29 @@
     },
     {
       "name": "subscriptionName",
-      "aliases": [
-          "subscriptionId"
-      ],
+      "aliases": ["subscriptionId"],
       "type": "pickList",
       "label": "Subscription",
       "required": true,
       "groupName": "AzureDetails",
       "helpMarkDown": "Select the Azure subscription",
       "properties": {
-          "EditableOptions": "True"
+        "EditableOptions": "True"
       },
       "visibleRule": "deploymentScope != Management Group"
-  },
-  {
-    "name": "resourceGroupName",
-    "type": "pickList",
-    "label": "Resource group",
-    "required": true,
-    "groupName": "AzureDetails",
-    "helpMarkDown": "Provide the name of a resource group.",
-    "properties": {
-      "EditableOptions": "True"
     },
-    "visibleRule": "deploymentScope = Resource Group"
-  },
+    {
+      "name": "resourceGroupName",
+      "type": "pickList",
+      "label": "Resource group",
+      "required": true,
+      "groupName": "AzureDetails",
+      "helpMarkDown": "Provide the name of a resource group.",
+      "properties": {
+        "EditableOptions": "True"
+      },
+      "visibleRule": "deploymentScope = Resource Group"
+    },
     {
       "name": "location",
       "type": "pickList",
@@ -95,7 +93,7 @@
       "helpMarkDown": "Location for the deployment to take place",
       "groupName": "AzureDetails"
     },
-    
+
     {
       "name": "managementGroupId",
       "type": "string",
@@ -217,7 +215,11 @@
     {
       "target": "location",
       "endpointId": "$(ConnectedServiceName)",
-      "dataSourceName": "AzureLocations"
+      "dataSourceName": "AzureLocationsByDeploymentScope",
+      "parameters": {
+        "subscriptionId": "$(subscriptionName)",
+        "deploymentScope": "$(deploymentScope)"
+      }
     }
   ],
   "execution": {
