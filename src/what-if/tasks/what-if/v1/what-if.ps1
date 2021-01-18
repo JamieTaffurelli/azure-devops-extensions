@@ -24,14 +24,14 @@ switch(Get-VstsInput -Name templateLocation -Require)
         $TemplateUri = Get-VstsInput -Name csmFileLink -Require 
         $TemplateParameterUri = Get-VstsInput -Name csmParametersFileLink -Require
 
-        $params = "-Name ${deploymentName} -TemplateUri ${TemplateUri} -TemplateParameterUri ${TemplateParameterUri} -SkipTemplateParameterPrompt -ResultFormat ${resultFormat} ${excludeChangeTypeParam} ${extraParameters}"
+        $params = "-Name ${deploymentName} -TemplateUri ${TemplateUri} -TemplateParameterUri ${TemplateParameterUri} -ResultFormat ${resultFormat} ${excludeChangeTypeParam} ${extraParameters}"
     }
     "Linked artifact"
     {
         $TemplateFile = Get-VstsInput -Name csmFile -Require 
         $TemplateParameterFile = Get-VstsInput -Name csmParametersFile -Require
 
-        $params = "-Name ${deploymentName} -TemplateFile ${TemplateFile} -TemplateParameterFile ${TemplateParameterFile} -SkipTemplateParameterPrompt -ResultFormat ${resultFormat} ${excludeChangeTypeParam} ${extraParameters}"
+        $params = "-Name ${deploymentName} -TemplateFile ${TemplateFile} -TemplateParameterFile ${TemplateParameterFile} -ResultFormat ${resultFormat} ${excludeChangeTypeParam} ${extraParameters}"
     }
 }
 
