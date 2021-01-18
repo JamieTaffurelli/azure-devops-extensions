@@ -10,8 +10,8 @@
   "author": "JamieTaffurelli",
   "version": {
     "Major": 0,
-    "Minor": 2,
-    "Patch": 6
+    "Minor": 3,
+    "Patch": 0
   },
   "instanceNameFormat": "What if Deployment",
   "minimumAgentVersion": "2.119.1",
